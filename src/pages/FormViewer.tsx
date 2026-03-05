@@ -8,18 +8,14 @@ import QuestionCard from '../components/QuestionCard';
 export default function FormViewer() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [form, setForm] = useState<Form | null>(null);
+  const [form] = useState<Form | null>(() => (id ? getForm(id) : null));
   const [currentSection, setCurrentSection] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
-    if (id) {
-      const f = getForm(id);
-      if (f) setForm(f);
-      else navigate('/');
-    }
-  }, [id, navigate]);
+    if (!form) navigate('/');
+  }, [form, navigate]);
 
   if (!form) return <div className="min-h-screen bg-gray-100 flex items-center justify-center text-gray-500">Loading...</div>;
 

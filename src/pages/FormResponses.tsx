@@ -7,20 +7,12 @@ import type { Form, FormResponse } from '../types/form';
 export default function FormResponses() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [form, setForm] = useState<Form | null>(null);
-  const [responses, setResponses] = useState<FormResponse[]>([]);
+  const [form] = useState<Form | null>(() => (id ? getForm(id) : null));
+  const [responses] = useState<FormResponse[]>(() => (id ? getResponses(id) : []));
 
   useEffect(() => {
-    if (id) {
-      const f = getForm(id);
-      if (f) {
-        setForm(f);
-        setResponses(getResponses(id));
-      } else {
-        navigate('/');
-      }
-    }
-  }, [id, navigate]);
+    if (!form) navigate('/');
+  }, [form, navigate]);
 
   if (!form) return <Layout><div className="text-gray-500 text-center py-20">Loading...</div></Layout>;
 

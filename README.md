@@ -1,6 +1,54 @@
-# React + TypeScript + Vite
+# Forms
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A Google Forms-like form generator built with React, TypeScript, and Tailwind CSS.
+
+## Features
+
+- **Form Builder** — Create and edit forms with 8 question types:
+  - Short answer, Paragraph, Multiple choice, Checkboxes, Dropdown, Date, Time, Linear scale
+- **Sections** — Organize questions into labeled sections; respondents navigate one section at a time
+- **Progress indicator** — Shows section progress while filling out multi-section forms
+- **Form Viewer** — Clean respondent-facing view with required field validation
+- **Responses View** — Browse all collected responses per form
+- **localStorage persistence** — All data stored locally; no backend required
+
+## Tech Stack
+
+- [React 18](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/) for bundling
+- [Tailwind CSS v3](https://tailwindcss.com/) (violet/purple palette)
+- [React Router v6](https://reactrouter.com/)
+- [Firebase](https://firebase.google.com/) placeholder (ready for integration)
+
+## Getting Started
+
+```bash
+npm install
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+## Build
+
+```bash
+npm run build
+```
+
+## Firebase Setup
+
+Edit `src/firebase.ts` and replace the placeholder values with your Firebase project configuration to enable cloud persistence.
+
+## Routes
+
+| Path | Description |
+|------|-------------|
+| `/` | Home — list of all forms |
+| `/builder/:id` | Form builder (use `/builder/new` to create) |
+| `/view/:id` | Fill out a form |
+| `/responses/:id` | View collected responses |
+| `/response/:id` | Submission confirmation |
+
 
 Currently, two official plugins are available:
 

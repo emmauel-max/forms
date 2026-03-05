@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import type { Form } from '../types/form';
@@ -6,12 +6,8 @@ import { getForms, deleteForm, createNewForm, saveForm } from '../utils/formUtil
 import { formatDate } from '../utils/formUtils';
 
 export default function Home() {
-  const [forms, setForms] = useState<Form[]>([]);
+  const [forms, setForms] = useState<Form[]>(getForms);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    setForms(getForms());
-  }, []);
 
   const handleCreate = () => {
     const newForm = createNewForm();

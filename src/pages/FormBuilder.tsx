@@ -9,23 +9,23 @@ import Header from '../components/Header';
 export default function FormBuilder() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [initialForm, setInitialForm] = useState<Form | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [initialForm] = useState<Form | null>(() => {
+    if (!id || id === 'new') return null;
+    return getForm(id);
+  });
 
   useEffect(() => {
     if (id === 'new') {
       const f = createNewForm();
       saveForm(f);
       navigate(`/builder/${f.id}`, { replace: true });
-    } else if (id) {
-      const f = getForm(id);
-      if (f) setInitialForm(f);
-      else navigate('/');
+    } else if (id && !initialForm) {
+      navigate('/');
     }
-    setLoading(false);
-  }, [id, navigate]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  if (loading || !initialForm) return <div className="min-h-screen bg-gray-100 flex items-center justify-center text-gray-500">Loading...</div>;
+  if (!initialForm) return <div className="min-h-screen bg-gray-100 flex items-center justify-center text-gray-500">Loading...</div>;
 
   return <FormBuilderInner initialForm={initialForm} />;
 }
