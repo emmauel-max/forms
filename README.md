@@ -14,10 +14,10 @@ A Google Forms-like form generator built with React, TypeScript, and Tailwind CS
 
 ## Tech Stack
 
-- [React 18](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
 - [Vite](https://vitejs.dev/) for bundling
 - [Tailwind CSS v3](https://tailwindcss.com/) (violet/purple palette)
-- [React Router v6](https://reactrouter.com/)
+- [React Router v7](https://reactrouter.com/)
 - [Firebase](https://firebase.google.com/) placeholder (ready for integration)
 
 ## Getting Started
