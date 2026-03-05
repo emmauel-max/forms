@@ -96,8 +96,9 @@
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Methodology</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Pain Points</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Validation</th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Features / Referral</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Features (Q7)</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Open-Ended Response (Q9)</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Referral Source (Q10)</th>
                             </tr>
                         </thead>
                         <tbody id="tableBody" class="bg-white divide-y divide-gray-200 text-sm">
@@ -205,7 +206,7 @@
         let allSurveyData = [];
 
         async function fetchData() {
-            tableBody.innerHTML = `<tr><td colspan="7" class="px-6 py-8 text-center text-sm text-gray-500">Fetching latest datasets...</td></tr>`;
+            tableBody.innerHTML = `<tr><td colspan="8" class="px-6 py-8 text-center text-sm text-gray-500">Fetching latest datasets...</td></tr>`;
             
             try {
                 const q = query(collection(db, "surveyResponses"), orderBy("timestamp", "desc"));
@@ -265,17 +266,19 @@
                             </td>
                             <td class="px-6 py-4">
                                 <div class="text-xs text-gray-700 max-w-xs break-words">${escapeHtml(data.q7_features) || '<span class="text-gray-400 italic">N/A</span>'}</div>
-                                <div class="text-xs text-gray-500 mt-1"><span class="font-medium">Via:</span> ${escapeHtml(data.q10_referral) || '-'}</div>
                             </td>
                             <td class="px-6 py-4">
                                 <div class="text-sm text-gray-700 max-w-xs break-words">${q9Text}</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-700">${escapeHtml(data.q10_referral) || '<span class="text-gray-400 italic">No response</span>'}</div>
                             </td>
                         </tr>
                     `;
                 });
 
                 if (totalResponses === 0) {
-                    html = `<tr><td colspan="7" class="px-6 py-10 text-center text-sm text-gray-500">No responses yet.</td></tr>`;
+                    html = `<tr><td colspan="8" class="px-6 py-10 text-center text-sm text-gray-500">No responses yet.</td></tr>`;
                 }
 
                 tableBody.innerHTML = html;
@@ -286,7 +289,7 @@
 
             } catch (error) {
                 console.error("Data Fetch Error:", error);
-                tableBody.innerHTML = `<tr><td colspan="7" class="px-6 py-10 text-center text-sm text-red-500 bg-red-50">Error pulling data. Verify Firestore permissions.</td></tr>`;
+                tableBody.innerHTML = `<tr><td colspan="8" class="px-6 py-10 text-center text-sm text-red-500 bg-red-50">Error pulling data. Verify Firestore permissions.</td></tr>`;
             }
         }
 
